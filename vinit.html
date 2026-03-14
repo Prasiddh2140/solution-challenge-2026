@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinit | Aspiring Developer</title>
+    <!-- Use Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0B0C10;
+            --card-bg: rgba(31, 40, 51, 0.4);
+            --card-border: rgba(102, 252, 241, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #C5C6C7;
+            --accent-1: #66FCF1;
+            --accent-2: #45A29E;
+            --accent-3: #9b51e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Animated Background Blobs for Visual Excellence */
+        .blob {
+            position: absolute;
+            filter: blur(90px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 12s infinite ease-in-out alternate;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(to right, var(--accent-3), transparent);
+            top: -150px;
+            left: -150px;
+            border-radius: 50%;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(to left, var(--accent-1), transparent);
+            bottom: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation-delay: -6s;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, -80px) scale(1.15); }
+        }
+
+        /* Premium Glassmorphism Card */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 28px;
+            padding: 3.5rem 3rem;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: translateY(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+            position: relative;
+            z-index: 10;
+            margin: auto 0;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px -15px rgba(102, 252, 241, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        /* Avatar styling with dynamic glow */
+        .avatar-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 2rem;
+            perspective: 1000px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .avatar-container:hover .avatar {
+            transform: rotateY(180deg);
+        }
+
+        .avatar .front, .avatar .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .avatar .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--accent-3), var(--accent-1));
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            filter: blur(20px);
+            z-index: 1;
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 0.9; transform: scale(1.05); }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-1);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        p.bio {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Status indicator */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(102, 252, 241, 0.1);
+            border: 1px solid rgba(102, 252, 241, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-1);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-1);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-1);
+            animation: blink 1.5s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Interactive Skill Tags */
+        .skills-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 252, 241, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .skill-tag:hover {
+            background: rgba(102, 252, 241, 0.08);
+            border-color: var(--accent-1);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 252, 241, 0.15);
+        }
+
+        /* Modern Action Buttons */
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: var(--bg-color);
+            border: none;
+            box-shadow: 0 4px 15px rgba(102, 252, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover::after {
+            transform: translateY(100%);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(102, 252, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .profile-card {
+                padding: 2.5rem 1.5rem;
+                width: 95%;
+            }
+            h1 { font-size: 2.2rem; }
+            .cta-buttons { flex-direction: column; gap: 1rem; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decorators -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- Main Content -->
+    <div class="profile-card">
+        
+        <!-- Interactive 3D Avatar -->
+        <div class="avatar-container">
+            <div class="avatar-glow"></div>
+            <div class="avatar">
+                <div class="front">V</div>
+                <div class="back">&lt;/&gt;</div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            LEARNING TO CODE
+        </div>
+
+        <!-- Header -->
+        <h1>Hello, I'm Vinit</h1>
+        <div class="subtitle">Aspiring Developer & Tech Enthusiast</div>
+        
+        <!-- Bio -->
+        <p class="bio">
+            I am currently a student exploring the vast and fascinating world of technology and programming. 
+            Driven by curiosity, I am keen to learn, build innovative projects, and ultimately make my mark 
+            as a known name in the tech industry. Every line of code is a step toward that goal.
+        </p>
+
+        <!-- Current Focus / Interests -->
+        <span class="skills-title">Currently Exploring</span>
+        <div class="skills">
+            <div class="skill-tag">Web Development</div>
+            <div class="skill-tag">Algorithms</div>
+            <div class="skill-tag">UI/UX Design</div>
+            <div class="skill-tag">Modern Frameworks</div>
+            <div class="skill-tag">Open Source</div>
+        </div>
+
+        <!-- Call to Actions -->
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">View My Projects</a>
+            <a href="#" class="btn btn-secondary">Connect With Me</a>
+        </div>
+    </div>
+
+    <!-- Micro-interactions Script -->
+    <script>
+        // Subtle 3D tilt effect onmousemove
+        const card = document.querySelector('.profile-card');
+        
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `translateY(-8px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Reset transform on mouse leave to prevent getting stuck
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `translateY(0) rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+</html>
