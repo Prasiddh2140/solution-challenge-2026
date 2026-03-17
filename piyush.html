@@ -3,10 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Welcome to the Solution Challenge 2026 project - a platform for innovation and impact.">
+    <title>Welcome | Solution Challenge 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --accent: #ff007f;
+            --text: #ffffff;
+            --bg-overlay: rgba(0, 0, 0, 0.4);
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                        url('welcome_bg.png') no-repeat center center/cover;
+            overflow: hidden;
+            background-color: #0f0c29; /* Fallback */
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #ff007f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.6);
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 2rem; }
+            p { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
-   <h1> Hello </h1> 
-   <p> -Piyush Baral</p>
+    <main class="container">
+        <h1>Welcome</h1>
+        <p>Step into the future of innovation. This is the starting point for your Solution Challenge 2026 journey.</p>
+        <a href="index.html" class="cta-button" id="getStartedBtn">Explore Project</a>
+        <div class="footer-note">
+            Built with passion by <strong>Piyush Baral</strong>
+        </div>
+    </main>
 </body>
 </html>
