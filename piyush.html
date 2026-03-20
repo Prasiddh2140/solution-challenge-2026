@@ -30,10 +30,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
-                        url('welcome_bg.png') no-repeat center center/cover;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+                url('welcome_bg.png') no-repeat center center/cover;
             overflow: hidden;
-            background-color: #0f0c29; /* Fallback */
+            background-color: #0f0c29;
+            /* Fallback */
         }
 
         .container {
@@ -98,13 +99,22 @@
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 2.5rem; }
-            .container { padding: 2rem; }
-            p { font-size: 1.1rem; }
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 2rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
-<body>
+
+<body>>
     <main class="container">
         <h1>Welcome</h1>
         <p>Step into the future of innovation. This is the starting point for your Solution Challenge 2026 journey.</p>
@@ -114,4 +124,5 @@
         </div>
     </main>
 </body>
+
 </html>
