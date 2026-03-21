@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to the Solution Challenge 2026 project - a platform for innovation and impact.">
-    <title>Welcome | Solution Challenge 2026</title>
+    <title>Drought Assistant AI | Solution Challenge 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
@@ -17,11 +17,7 @@
             --glass: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -30,99 +26,379 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-                url('welcome_bg.png') no-repeat center center/cover;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('welcome_bg.png') no-repeat center center/cover;
             overflow: hidden;
             background-color: #0f0c29;
-            /* Fallback */
+            position: relative;
         }
 
-        .container {
-            text-align: center;
-            padding: 3rem;
+        /* Fullscreen Glassmorphic Login Overlay */
+        .login-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(25px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .login-box {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            max-width: 600px;
-            width: 90%;
-            animation: fadeIn 1.2s ease-out;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        h1 {
+        .login-box h2 {
             font-family: 'Outfit', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             background: linear-gradient(45deg, #fff, #ff007f);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .google-btn {
+            background: white;
+            color: #444;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .google-btn:hover { box-shadow: 0 5px 15px rgba(255,255,255,0.3); transform: scale(1.05); }
+
+        /* Main Chat Application */
+        .chat-container {
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 650px;
+            width: 90%;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 1.2s ease-out;
+            position: relative;
+        }
+
+        .header-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #fff, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
         }
 
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+        #userGreeting { font-size: 0.9rem; opacity: 0.8; font-weight: 500; }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            border-radius: 50px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.6);
-        }
-
-        .footer-note {
-            margin-top: 2rem;
+        /* Settings Pane */
+        .settings-pane {
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
             font-size: 0.9rem;
-            opacity: 0.7;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .settings-pane input[type="text"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+        
+        .save-settings-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            align-self: flex-start;
+            font-weight: 600;
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .container {
-                padding: 2rem;
-            }
-
-            p {
-                font-size: 1.1rem;
-            }
+        /* Chat Panel */
+        #chatBox {
+            flex: 1;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            min-height: 0;
         }
+
+        .message {
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-message {
+            background: rgba(255,255,255,0.1);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .input-area { display: flex; gap: 10px; }
+
+        #chatInput {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: white;
+            outline: none;
+        }
+        #chatInput:focus { border-color: var(--primary); }
+
+        .send-btn {
+            padding: 1rem 2rem;
+            color: white;
+            background: linear-gradient(45deg, #8a2be2, #ff007f);
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+        }
+        .send-btn:hover { transform: scale(1.05); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 
-<body>>
-    <main class="container">
-        <h1>Welcome</h1>
-        <p>Step into the future of innovation. This is the starting point for your Solution Challenge 2026 journey.</p>
-        <a href="index.html" class="cta-button" id="getStartedBtn">Explore Project</a>
-        <div class="footer-note">
-            Built with passion by <strong>Piyush Baral</strong>
+<body>
+    <!-- Google Firebase Login Overlay -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box">
+            <h2>Drought Assistant AI</h2>
+            <p style="margin-bottom: 20px; opacity: 0.8;">Sign in securely via Firebase</p>
+            <button class="google-btn" id="loginBtn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="20" alt="Google">
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <main class="chat-container">
+        <div class="header-panel">
+            <h1>Drought Assistant AI</h1>
+            <span id="userGreeting">Loading...</span>
+        </div>
+
+        <!-- The new User Settings Database Panel -->
+        <div class="settings-pane">
+            <label><strong>🌍 Monitored Location:</strong></label>
+            <input type="text" id="savedLocation" placeholder="Enter your city/region (e.g. Koraput, Odisha)">
+            <label style="display:flex; align-items:center; gap:8px;">
+                <input type="checkbox" id="notifyCheckbox" style="transform: scale(1.2);">
+                Send Email Warning to my Google Mail if strict Drought detected.
+            </label>
+            <button class="save-settings-btn" onclick="saveSettings()">Save & Test AI Notice</button>
+        </div>
+        
+        <div id="chatBox">
+            <div class="message ai-message">
+                Hello! Set your location and notification preferences above to stay safe. If you have any immediate agricultural questions, just ask!
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="chatInput" placeholder="Type your location or ask a question..." onkeypress="handleEnter(event)">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
         </div>
     </main>
+
+    <!-- FIREBASE INTEGRATION MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        // Your exact authentic Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4XARTPa-gJ81pwMqXEU_jsfypjuhsexA",
+            authDomain: "drought-assistant.firebaseapp.com",
+            projectId: "drought-assistant",
+            storageBucket: "drought-assistant.firebasestorage.app",
+            messagingSenderId: "1086527978901",
+            appId: "1:1086527978901:web:db52abaa901d14d4710a9c",
+            measurementId: "G-NMEMRN1M8Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        let currentUser = null;
+
+        // Firebase Listeners
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('userGreeting').innerText = `Welcome, ${user.displayName}`;
+                
+                // Fetch saved location from Cloud Firestore
+                try {
+                    const docSnap = await getDoc(doc(db, "users", user.uid));
+                    if (docSnap.exists() && docSnap.data().location) {
+                        document.getElementById('savedLocation').value = docSnap.data().location;
+                        document.getElementById('notifyCheckbox').checked = docSnap.data().wantNotification;
+                        document.getElementById('chatInput').value = `Tell me more about ${docSnap.data().location}`;
+                    }
+                } catch(e) {}
+            } else {
+                currentUser = null;
+                document.getElementById('loginOverlay').style.display = 'flex';
+            }
+        });
+
+        document.getElementById('loginBtn').onclick = () => {
+            signInWithPopup(auth, provider).catch(e => {
+                console.error("Firebase Login Error:", e);
+                alert("Google Sign In Error: " + e.message + "\n\nMake sure you enabled Google Auth in your Firebase Console!");
+            });
+        };
+
+        window.saveSettings = async () => {
+            if(!currentUser) return;
+            const loc = document.getElementById('savedLocation').value;
+            const notif = document.getElementById('notifyCheckbox').checked;
+            
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), {
+                    location: loc,
+                    wantNotification: notif,
+                    email: currentUser.email
+                });
+                alert("Settings and Location safely saved to Google Firestore Cloud Database!");
+                
+                // Trigger Background Async Email Checker Logic if user enabled notifications!
+                if (notif && loc) {
+                    alert(`Starting AI System to analyze ${loc} and email a detailed HTML report to ${currentUser.email}...`);
+                    fetch('http://localhost:3000/api/run-drought-alert', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: currentUser.email, location: loc })
+                    }).catch(console.log);
+                }
+            } catch(e) {
+                alert("Database Update Failed - Missing Firebase Config Setup. Open Console for logs.");
+            }
+        };
+    </script>
+
+    <!-- CHAT UI JAVASCRIPT LOGIC -->
+    <script>
+        let chatHistory = [];
+
+        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const btn = document.getElementById('sendBtn');
+            const text = input.value.trim();
+            if (!text) return;
+            
+            appendMessage('user', text);
+            input.value = '';
+            btn.disabled = true;
+            chatHistory.push({ role: 'user', text: text });
+            
+            const typingId = 'typing-' + Date.now();
+            appendMessage('ai', '...', typingId);
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ history: chatHistory })
+                });
+                
+                const data = await response.json();
+                document.getElementById(typingId).remove();
+                
+                if (!response.ok) {
+                    appendMessage('ai', '⚠️ Error: ' + (data.error || "Server issue"));
+                    return;
+                }
+                
+                chatHistory.push({ role: 'ai', text: data.reply });
+                appendMessage('ai', formatText(data.reply));
+                
+            } catch (err) {
+                document.getElementById(typingId).remove();
+                appendMessage('ai', '⚠️ Connection Error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function appendMessage(role, text, id = null) {
+            const chatBox = document.getElementById('chatBox');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${role}-message`;
+            if (id) msgDiv.id = id;
+            msgDiv.innerHTML = text;
+            chatBox.appendChild(msgDiv);
+            setTimeout(() => chatBox.scrollTop = chatBox.scrollHeight, 10);
+        }
+
+        function formatText(text) { return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'); }
+    </script>
 </body>
 
 </html>
