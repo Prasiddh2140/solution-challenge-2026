@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard - Drought AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        danger: '#ef4444',
+                        warning: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold text-primary">Drought AI</a>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <span id="user-name" class="hidden md:block font-medium">Volunteer</span>
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">V</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar: Profile & Settings -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Profile Card -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="relative inline-block mb-4">
+                        <img id="profile-img" src="https://ui-avatars.com/api/?name=Volunteer&background=3b82f6&color=fff" class="w-24 h-24 rounded-full border-4 border-primary/20 p-1 mx-auto">
+                        <span class="absolute bottom-0 right-0 bg-secondary text-white p-1 rounded-full text-xs border-2 border-white dark:border-gray-800"><i class="fa-solid fa-check"></i></span>
+                    </div>
+                    <h2 id="display-name" class="text-xl font-bold">John Doe</h2>
+                    <p class="text-sm text-gray-500 mb-4">Member since Mar 2024</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-2 rounded-lg">
+                            <div class="font-bold text-primary">12</div>
+                            <div>Completed</div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-2 rounded-lg">
+                            <div class="font-bold text-accent">4.9/5</div>
+                            <div>Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Selector -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                    <h3 class="font-bold mb-4">My Skills</h3>
+                    <div class="flex flex-wrap gap-2" id="skills-list">
+                        <!-- Skills will be populated here -->
+                    </div>
+                    <button id="edit-skills" class="mt-4 text-xs text-primary font-bold flex items-center gap-1 hover:underline">
+                        <i class="fa-solid fa-pen"></i> Edit Skills
+                    </button>
+                </div>
+
+                <!-- Availability -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                    <h3 class="font-bold mb-4">Availability</h3>
+                    <div class="grid grid-cols-7 gap-1 text-[10px] text-center mb-4">
+                        <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1" id="availability-slots">
+                        <!-- 7 days, checkable slots -->
+                        <div class="h-6 bg-secondary/20 border border-secondary rounded cursor-pointer"></div>
+                        <div class="h-6 bg-secondary/20 border border-secondary rounded cursor-pointer"></div>
+                        <div class="h-6 bg-gray-100 dark:bg-gray-700 border border-transparent rounded cursor-pointer"></div>
+                        <div class="h-6 bg-secondary/20 border border-secondary rounded cursor-pointer"></div>
+                        <div class="h-6 bg-secondary/20 border border-secondary rounded cursor-pointer"></div>
+                        <div class="h-6 bg-gray-100 dark:bg-gray-700 border border-transparent rounded cursor-pointer"></div>
+                        <div class="h-6 bg-gray-100 dark:bg-gray-700 border border-transparent rounded cursor-pointer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content: Assignments & Timeline -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Active Assignments -->
+                <section>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-tasks text-primary"></i>
+                            Active Assignments
+                        </h2>
+                        <span id="active-count" class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">2 Pending</span>
+                    </div>
+                    <div id="assignments-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Assignment Cards -->
+                        <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-md border-l-4 border-danger animate-pulse">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-danger tracking-wider">Emergency</span>
+                                    <h4 class="font-bold text-lg">Medical Supplies Delivery</h4>
+                                </div>
+                                <span class="text-xs text-gray-400">2.4 km away</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Central Park West, Sector 4</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="flex-1 bg-secondary hover:bg-green-600 text-white py-2 rounded-lg font-bold transition">Accept</button>
+                                <button class="flex-1 border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 py-2 rounded-lg transition">Decline</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-md border-l-4 border-warning">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-warning tracking-wider">High</span>
+                                    <h4 class="font-bold text-lg">Clean Water Access</h4>
+                                </div>
+                                <span class="text-xs text-gray-400">1.8 km away</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>East Side High School</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="flex-1 bg-secondary hover:bg-green-600 text-white py-2 rounded-lg font-bold transition">Accept</button>
+                                <button class="flex-1 border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 py-2 rounded-lg transition">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Impact Timeline -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-timeline text-secondary"></i>
+                        Impact Timeline
+                    </h2>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
+                        <div id="timeline" class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <!-- Timeline Items -->
+                            <div class="p-4 flex gap-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-bowl-food"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h5 class="font-bold">Food Distribution</h5>
+                                        <span class="text-xs text-gray-400">Yesterday</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Helped 25 families with monthly rations.</p>
+                                    <div class="mt-2 flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded-full bg-secondary/20 text-secondary text-[10px] font-bold">+50 Impact Points</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 flex gap-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-chalkboard-user"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h5 class="font-bold">Community Teaching</h5>
+                                        <span class="text-xs text-gray-400">3 days ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">2-hour math tutoring session for 10 kids.</p>
+                                    <div class="mt-2 flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-bold">+30 Impact Points</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Skills Edit Modal -->
+    <div id="skills-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-2xl font-bold mb-6">Select Your Skills</h3>
+            <div class="grid grid-cols-2 gap-3 mb-8" id="modal-skills-grid">
+                <!-- Multi-select buttons -->
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Medical">Medical</button>
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Food Dist">Food Dist</button>
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Water Repair">Water Repair</button>
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Teaching">Teaching</button>
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Transport">Transport</button>
+                <button class="skill-option p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:border-primary transition" data-skill="Disaster Resp">Disaster Resp</button>
+            </div>
+            <div class="flex gap-4">
+                <button id="save-skills" class="flex-1 bg-primary text-white py-3 rounded-xl font-bold hover:bg-blue-600 transition">Save Changes</button>
+                <button id="close-skills-modal" class="flex-1 border border-gray-200 dark:border-gray-600 py-3 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2"></div>
+
+    <script type="module" src="volunteer.js"></script>
+</body>
+</html>

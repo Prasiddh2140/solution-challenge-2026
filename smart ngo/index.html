@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drought AI Volunteer Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        danger: '#ef4444',
+                        warning: '#f97316',
+                        success: '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-card bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-primary">Drought AI</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="hover:text-primary transition">Home</a>
+                    <a href="/report.html" class="hover:text-primary transition">Report Issue</a>
+                    <a href="/volunteer.html" class="hover:text-primary transition">Volunteer</a>
+                    <a href="/ngo.html" class="hover:text-primary transition">NGO Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <a href="/auth.html" id="auth-btn" class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Help Your Community
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Report Issues, Get Matched Volunteers, and Build a Stronger Neighborhood Together.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/report.html" class="bg-danger hover:bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
+                    <i class="fa-solid fa-bullhorn"></i> Report Issue
+                </a>
+                <a href="/auth.html?role=volunteer" class="bg-secondary hover:bg-green-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
+                    <i class="fa-solid fa-handshake-angle"></i> Join as Volunteer
+                </a>
+                <a href="/auth.html?role=ngo" class="bg-primary hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
+                    <i class="fa-solid fa-chart-line"></i> NGO Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center shadow-lg">
+                    <div class="text-primary text-4xl mb-4"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="text-4xl font-bold mb-2">500+</div>
+                    <div class="text-gray-600 dark:text-gray-400">Issues Resolved</div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center shadow-lg">
+                    <div class="text-secondary text-4xl mb-4"><i class="fa-solid fa-users"></i></div>
+                    <div class="text-4xl font-bold mb-2">1,200</div>
+                    <div class="text-gray-600 dark:text-gray-400">Volunteers</div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center shadow-lg">
+                    <div class="text-accent text-4xl mb-4"><i class="fa-solid fa-heart"></i></div>
+                    <div class="text-4xl font-bold mb-2">10K</div>
+                    <div class="text-gray-600 dark:text-gray-400">People Helped</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & SDG Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-12">Our Sustainable Impact</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="flex flex-col items-center">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-01.jpg" alt="No Poverty" class="w-24 h-24 mb-4 rounded-lg shadow-md">
+                    <span class="font-medium">No Poverty</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-02.jpg" alt="Zero Hunger" class="w-24 h-24 mb-4 rounded-lg shadow-md">
+                    <span class="font-medium">Zero Hunger</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg" alt="Good Health" class="w-24 h-24 mb-4 rounded-lg shadow-md">
+                    <span class="font-medium">Good Health</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-06.jpg" alt="Clean Water" class="w-24 h-24 mb-4 rounded-lg shadow-md">
+                    <span class="font-medium">Clean Water</span>
+                </div>
+            </div>
+            <p class="mt-12 text-lg text-gray-600 dark:text-gray-400 italic max-w-2xl mx-auto">
+                "Small acts of many, led by the right technology, can solve the biggest challenges of our time."
+            </p>
+        </div>
+    </section>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
