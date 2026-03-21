@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smartngo-v1';
+const CACHE_NAME = 'droughtai-v1';
 const ASSETS = [
     '/',
     '/index.html',

@@ -1,6 +1,6 @@
 {
-  "name": "SmartNGO Volunteer Platform",
-  "short_name": "SmartNGO",
+  "name": "Drought AI Volunteer Platform",
+  "short_name": "Drought AI",
   "description": "Report community issues and match with volunteers in real-time.",
   "start_url": "/index.html",
   "display": "standalone",
