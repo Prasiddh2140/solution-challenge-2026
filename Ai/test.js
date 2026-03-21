@@ -1,3 +1,11 @@
+// Import all our AI feature modules!
+const parseReport = require('./parseReport');
+const matchVolunteer = require('./matchVolunteer');
+const summarizeNeeds = require('./summarizeNeeds');
+
+// Utility to slow down the tests so we don't trigger the API's Speed Limit (429 Error)
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function runTests() {
   console.log("🚀 Starting AI Feature Tests...\n");
 
@@ -13,10 +21,14 @@ async function runTests() {
       - School closed due to flood damage, 200 students affected
     `;
     const parsed = await parseReport(sampleReport);
-    console.log("✅ parseReport PASSED:", parsed);
+    console.log("✅ parseReport PASSED:\n", JSON.stringify(parsed, null, 2));
   } catch (err) {
     console.error("❌ parseReport FAILED:", err.message);
   }
+
+  // Waiting 16 seconds to cool down the API Key
+  console.log("\n⏳ Waiting 16 seconds to avoid hitting API rate limits...");
+  await delay(16000);
 
   // TEST 2: matchVolunteer
   console.log("\n🤝 TEST 2: matchVolunteer.js");
@@ -30,10 +42,14 @@ async function runTests() {
       { id: "n2", title: "Food supply for families", category: "Food", urgency: "High", location: "Koraput" }
     ];
     const matched = await matchVolunteer(volunteers, needs);
-    console.log("✅ matchVolunteer PASSED:", matched);
+    console.log("✅ matchVolunteer PASSED:\n", JSON.stringify(matched, null, 2));
   } catch (err) {
     console.error("❌ matchVolunteer FAILED:", err.message);
   }
+
+  // Waiting 16 seconds again
+  console.log("\n⏳ Waiting 16 seconds again to avoid hitting API rate limits...");
+  await delay(16000);
 
   // TEST 3: summarizeNeeds
   console.log("\n📊 TEST 3: summarizeNeeds.js");
@@ -44,7 +60,7 @@ async function runTests() {
       { id: "n3", title: "School flood repair", category: "Education", urgency: "Medium", location: "Koraput" }
     ];
     const summary = await summarizeNeeds(allNeeds);
-    console.log("✅ summarizeNeeds PASSED:", summary);
+    console.log("✅ summarizeNeeds PASSED:\n", JSON.stringify(summary, null, 2));
   } catch (err) {
     console.error("❌ summarizeNeeds FAILED:", err.message);
   }
