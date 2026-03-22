@@ -124,7 +124,7 @@ onAuthStateChanged(auth, async (user) => {
                         <i class="fa-solid fa-user-tie text-primary"></i> Volunteer Dashboard
                     </a>
                     <a href="/ngo.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition font-bold text-xs">
-                        <i class="fa-solid fa-clipboard-list text-secondary"></i> My Reports
+                        <i class="fa-solid fa-clipboard-list text-secondary"></i> NGO Board
                     </a>
                     <div class="h-px bg-gray-100 dark:bg-gray-700 my-2"></div>
                     <button id="logout-btn-global" class="w-full flex items-center gap-3 p-3 text-xs font-bold text-danger bg-red-50 dark:bg-red-900/10 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/20 transition">
