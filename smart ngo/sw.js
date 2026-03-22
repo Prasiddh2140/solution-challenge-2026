@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smartngo-v1';
+const CACHE_NAME = 'smartngo-v7';
 const ASSETS = [
     '/',
     '/index.html',
@@ -27,6 +27,12 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('fetch', (e) => {
     e.respondWith(
-        caches.match(e.request).then((res) => res || fetch(e.request))
+        fetch(e.request)
+            .then((res) => {
+                const resClone = res.clone();
+                caches.open(CACHE_NAME).then((cache) => cache.put(e.request, resClone));
+                return res;
+            })
+            .catch(() => caches.match(e.request))
     );
 });

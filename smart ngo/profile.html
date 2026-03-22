@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - SmartNGO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        danger: '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-card bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-primary">SmartNGO</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="hover:text-primary transition">Home</a>
+                    <a href="/report.html" class="hover:text-primary transition">Report Issue</a>
+                    <a href="/volunteer.html" class="hover:text-primary transition">Volunteer</a>
+                    <a href="/ngo.html" class="hover:text-primary transition">NGO Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <div id="profile-widget-container" class="flex items-center gap-2">
+                        <a href="/auth.html" id="auth-btn" class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-12 px-4 max-w-4xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            <div class="h-32 bg-gradient-to-r from-primary to-secondary"></div>
+            <div class="px-8 pb-8">
+                <div class="relative -mt-16 mb-6 flex justify-center sm:justify-start">
+                    <img id="profile-img" src="https://ui-avatars.com/api/?name=User&background=3b82f6&color=fff" class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 shadow-xl object-cover">
+                </div>
+                
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                    <div>
+                        <h1 id="user-display-name" class="text-3xl font-bold">Loading...</h1>
+                        <p id="user-email" class="text-gray-500">Checking credentials...</p>
+                        <div class="mt-2 flex gap-2">
+                            <span id="user-role-badge" class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-full">Explorer</span>
+                        </div>
+                    </div>
+                    <button id="logout-btn-page" class="bg-red-50 text-danger px-6 py-3 rounded-xl font-bold hover:bg-red-100 transition flex items-center gap-2">
+                        <i class="fa-solid fa-power-off"></i> Sign Out
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-100 dark:border-gray-700 pt-8">
+                    <div class="space-y-4">
+                        <h3 class="font-bold flex items-center gap-2 text-primary">
+                            <i class="fa-solid fa-user-circle"></i> Basic Info
+                        </h3>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-gray-400 uppercase">Display Name</label>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl" id="info-name">--</div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-gray-400 uppercase">Email Address</label>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl" id="info-email">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="font-bold flex items-center gap-2 text-secondary">
+                            <i class="fa-solid fa-shield-halved"></i> Security & Metadata
+                        </h3>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-gray-400 uppercase">Account Created</label>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl" id="info-created">--</div>
+                        </div>
+                        <div class="flex gap-4">
+                           <a href="/volunteer.html" class="flex-1 bg-gray-50 dark:bg-gray-700 p-4 rounded-2xl text-center hover:bg-primary/10 transition group">
+                               <i class="fa-solid fa-hand-holding-heart text-2xl text-primary mb-2 group-hover:scale-110 transition"></i>
+                               <p class="text-[10px] font-bold">Volunteer</p>
+                           </a>
+                           <a href="/ngo.html" class="flex-1 bg-gray-50 dark:bg-gray-700 p-4 rounded-2xl text-center hover:bg-secondary/10 transition group">
+                               <i class="fa-solid fa-rectangle-list text-2xl text-secondary mb-2 group-hover:scale-110 transition"></i>
+                               <p class="text-[10px] font-bold">My Reports</p>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2"></div>
+
+    <script type="module">
+        import { auth, db, showToast } from './app.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = '/auth.html';
+                return;
+            }
+
+            // Fill UI
+            document.getElementById('profile-img').src = user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName || 'U'}&background=3b82f6&color=fff`;
+            document.getElementById('user-display-name').textContent = user.displayName || 'SmartNGO User';
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('info-name').textContent = user.displayName || 'Not Set';
+            document.getElementById('info-email').textContent = user.email;
+
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    document.getElementById('user-role-badge').textContent = data.role || 'Explorer';
+                    document.getElementById('info-created').textContent = new Date(data.createdAt).toLocaleDateString();
+                }
+            } catch (e) { console.error(e); }
+        });
+
+        document.getElementById('logout-btn-page').onclick = () => {
+            signOut(auth).then(() => {
+                showToast('Logged out.', 'info');
+                location.href = '/';
+            });
+        };
+    </script>
+</body>
+</html>

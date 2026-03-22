@@ -41,7 +41,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold text-primary">SmartNGO</span>
+                    <a href="/" class="text-2xl font-bold text-primary">SmartNGO</a>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
@@ -55,7 +55,9 @@
                     <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                         <i id="theme-icon" class="fa-solid fa-moon"></i>
                     </button>
-                    <a href="/auth.html" id="auth-btn" class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">Login</a>
+                    <div id="profile-widget-container" class="flex items-center gap-2">
+                        <a href="/auth.html" id="auth-btn" class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">Login</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,7 +76,7 @@
                 <a href="/report.html" class="bg-danger hover:bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
                     <i class="fa-solid fa-bullhorn"></i> Report Issue
                 </a>
-                <a href="/auth.html?role=volunteer" class="bg-secondary hover:bg-green-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
+                <a href="/volunteer.html" class="bg-secondary hover:bg-green-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
                     <i class="fa-solid fa-handshake-angle"></i> Join as Volunteer
                 </a>
                 <a href="/auth.html?role=ngo" class="bg-primary hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition transform hover:scale-105">
@@ -140,5 +142,6 @@
 
     <!-- Scripts -->
     <script type="module" src="app.js"></script>
+    <script src="chatbot-widget.js" type="module"></script>
 </body>
 </html>

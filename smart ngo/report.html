@@ -31,14 +31,28 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="text-2xl font-bold text-primary">SmartNGO</a>
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
-                </button>
-                <a href="/" class="text-sm font-medium hover:text-primary">Back to Home</a>
+    <nav class="fixed w-full z-50 glass-card bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-primary">SmartNGO</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="hover:text-primary transition">Home</a>
+                    <a href="/report.html" class="hover:text-primary transition">Report Issue</a>
+                    <a href="/volunteer.html" class="hover:text-primary transition">Volunteer</a>
+                    <a href="/ngo.html" class="hover:text-primary transition">NGO Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <div id="profile-widget-container" class="flex items-center gap-2">
+                        <a href="/auth.html" id="auth-btn" class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">Login</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -143,5 +157,6 @@
     <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2"></div>
 
     <script type="module" src="report.js"></script>
+    <script src="chatbot-widget.js" type="module"></script>
 </body>
 </html>

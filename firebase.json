@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "SmartNGO Volunteer Platform",
+        "supportEmail": "piyushbaral254@gmail.com"
+      }
+    }
+  }
+}
